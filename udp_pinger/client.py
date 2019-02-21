@@ -1,5 +1,6 @@
 #!/usr/env/python
 
+import sys
 import time
 import socket
 
@@ -64,8 +65,16 @@ def sendPings(amt, timeoutInSecs):
 
 
 def main():
+
+    if(len(sys.argv) < 2):
+        print("You must specify an IP address")
+        return
+
+    ip = sys.argv[1]
+    print("Connecting to " + ip)
+
     # send 10 pings with 1 second timeouts and get results
-    times = sendPings(10, 1)
+    times = sendPings(10, 1 )
 
     avg = sum(times) / float(len(times))
     print("Average round-trip time: " + str(avg))
